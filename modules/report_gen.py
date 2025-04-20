@@ -1,12 +1,7 @@
-import os
+import json
 
-def generate_report(target, modules):
-    print("[+] Generating Report for", target)
-    report_file = f"output/{target}/webhunter_report.md"
+def generate_report(results):
+    report_file = "scan_report.json"
     with open(report_file, 'w') as f:
-        f.write(f"# WebHunter Report for {target}\n")
-        f.write(f"Modules run: {', '.join(modules)}\n")
-        f.write("\n## Findings:\n")
-        # Placeholder for actual findings and results
-        f.write("No findings yet...\n")
-    print(f"[+] Report generated at {report_file}")
+        json.dump(results, f, indent=4)
+    print(f"Report saved to {report_file}")
