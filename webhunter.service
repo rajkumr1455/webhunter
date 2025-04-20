@@ -1,0 +1,14 @@
+
+[Unit]
+Description=WebHunter Automation Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 /opt/webhunter/cli.py --target default.com --modules full
+WorkingDirectory=/opt/webhunter
+StandardOutput=append:/var/log/webhunter.log
+StandardError=append:/var/log/webhunter_error.log
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
