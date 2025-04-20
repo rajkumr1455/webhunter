@@ -1,11 +1,8 @@
 import subprocess
-import os
 
-def run(target):
-    print("[+] Running Subdomain Enumeration")
-    out_file = f"output/{target}/subdomains.txt"
-    cmd = f"subfinder -d {target} -silent >> {out_file}"
-    subprocess.run(cmd, shell=True)
-    with open(out_file, 'r') as f:
-        found = len(f.readlines())
-    print(f"[+] Found {found} subdomains")
+def run_subdomain_enum():
+    domain = "example.com"
+    print(f"Starting subdomain enumeration for {domain}...")
+    result = subprocess.run(['subfinder', '-d', domain], capture_output=True, text=True)
+    print("Subdomains found:")
+    print(result.stdout)
