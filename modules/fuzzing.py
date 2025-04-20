@@ -1,10 +1,16 @@
-import subprocess
-import os
+import requests
 
-def run(target):
-    print("[+] Starting Fuzzing on common endpoints")
-    output_dir = f"output/{target}/fuzzing/"
-    os.makedirs(output_dir, exist_ok=True)
-    # Placeholder for ffuf command
-    with open(f"{output_dir}/result.txt", 'w') as f:
-        f.write("FFUF fuzzing simulated output\n")
+def run_fuzzing():
+    target = "http://example.com"
+    paths = ["admin", "login", "dashboard"]
+    
+    print(f"Starting fuzzing on {target}...")
+    
+    for path in paths:
+        url = f"{target}/{path}"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            print(f"Found valid path: {url}")
+        else:
+            print(f"Invalid path: {url}")
