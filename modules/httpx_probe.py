@@ -1,9 +1,8 @@
 import subprocess
-import os
 
-def run(target):
-    print("[+] Probing for live hosts with httpx")
-    input_file = f"output/{target}/subdomains.txt"
-    output_file = f"output/{target}/httpx.json"
-    cmd = f"cat {input_file} | httpx -json -title -status-code -tech-detect -silent > {output_file}"
-    subprocess.run(cmd, shell=True)
+def run_httpx_probe():
+    domain = "example.com"
+    print(f"Starting HTTP probe for {domain}...")
+    result = subprocess.run(['httpx', '-u', domain, '-title', '-status-code'], capture_output=True, text=True)
+    print("HTTP probe results:")
+    print(result.stdout)
