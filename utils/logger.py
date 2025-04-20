@@ -1,7 +1,7 @@
 import logging
 
 def setup_logger():
-    logger = logging.getLogger("webhunter")
+    logger = logging.getLogger('webhunter')
     logger.setLevel(logging.INFO)
     ch = logging.StreamHandler()
     ch.setLevel(logging.INFO)
