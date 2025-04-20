@@ -1,20 +1,13 @@
 import requests
-import json
 
-def run(target):
-    print("[+] Running GraphQL Endpoint Detection")
-    endpoints = ["/graphql", "/api/graphql", "/graphiql"]
-    found = []
-
-    for ep in endpoints:
-        url = f"https://{target}{ep}"
-        try:
-            res = requests.post(url, json={"query": "{__typename}"}, timeout=5)
-            if res.status_code == 200 and "data" in res.text:
-                print(f"[+] Found GraphQL endpoint: {url}")
-                found.append(url)
-        except requests.RequestException:
-            continue
-
-    with open(f"output/{target}/graphql_findings.json", 'w') as f:
-        json.dump({"endpoints": found}, f, indent=2)
+def run_graphql_scan():
+    url = "https://example.com/graphql"
+    headers = {"Content-Type": "application/json"}
+    query = "{ __schema { types { name } } }"
+    response = requests.post(url, json={'query': query}, headers=headers)
+    
+    if response.status_code == 200:
+        print("GraphQL endpoint is reachable.")
+        print("Response:", response.json())
+    else:
+        print(f"Failed to reach GraphQL endpoint. Status code: {response.status_code}")
