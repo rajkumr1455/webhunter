@@ -1,11 +1,11 @@
 #!/bin/bash
 
-echo "[+] Installing required tools..."
+echo "[+] Installing necessary tools..."
 
-# Install Go tools
-go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
-go install github.com/projectdiscovery/httpx/cmd/httpx@latest
-go install github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
-go install github.com/ffuf/ffuf@latest
+# Install Go
+sudo apt install -y golang-go
 
-echo "[+] Tools installation complete."
+# Install httpx
+go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
+
+echo "[+] Tools installation complete!"
