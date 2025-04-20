@@ -1,6 +1,14 @@
-import os
+import requests
+from bs4 import BeautifulSoup
 
-def run(target):
-    print("[+] Running DOM XSS analysis")
-    with open(f"output/{target}/dom_xss.log", 'w') as f:
-        f.write("DOM XSS module not fully implemented yet\n")
+def run_dom_xss():
+    url = "http://example.com"
+    print(f"Scanning {url} for DOM-based XSS...")
+    
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    if "document.location" in str(soup):
+        print("Potential DOM-based XSS vulnerability detected!")
+    else:
+        print("No DOM-based XSS found.")
