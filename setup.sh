@@ -1,12 +1,13 @@
 #!/bin/bash
 
-echo "[+] Installing dependencies..."
+echo "[+] Setting up WebHunter..."
 
-# Install Python dependencies
+# Install dependencies
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 
-# Install additional system packages if necessary
-sudo apt update
-sudo apt install -y subfinder httpx nuclei ffuf
+# Install subfinder (Go tool)
+go install github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 
-echo "[+] Installation complete."
+echo "[+] Setup complete!"
