@@ -1,8 +1,6 @@
-import os
+import json
 
-def get_config():
-    config = {
-        "slack_webhook_url": os.getenv("SLACK_WEBHOOK_URL", ""),
-        "report_format": "markdown"
-    }
+def load_config():
+    with open("config.json", "r") as f:
+        config = json.load(f)
     return config
